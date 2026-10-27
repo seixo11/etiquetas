@@ -4,7 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Etiquetas de envío</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.6/JsBarcode.all.min.js"></script>
 <style id="pageStyle"></style>
 <style>
 :root{--rojo:#e52421;--fondo:#f4f4f5;--panel:#fff;--txt:#1d1d1f;--sub:#6b6b70;--borde:#d9d9de}
@@ -34,6 +33,7 @@ button.mini{padding:4px 9px;font-size:12px}
 .acciones{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
 .agenda{display:flex;gap:8px}
 .agenda select{flex:1}
+main>section{min-width:0}
 .prev{position:sticky;top:16px;align-self:start}
 .prevBox{display:flex;justify-content:center;padding:20px;background:var(--panel);border:1px solid var(--borde);border-radius:10px;overflow:auto}
 .nota{font-size:12px;color:var(--sub);margin-top:10px}
@@ -41,47 +41,50 @@ button.mini{padding:4px 9px;font-size:12px}
 .ok{color:#1a7f37;font-size:12px;margin-left:6px}
 
 /* ---------- Etiqueta (mm, para imprimir a 203 ppp) ---------- */
-.etq{background:#fff;color:#000;width:var(--w);height:var(--h);padding:3mm;display:flex;flex-direction:column;font-family:Arial,Helvetica,sans-serif;overflow:hidden;box-shadow:0 1px 6px rgba(0,0,0,.25);border-radius:2px}
+.etq{background:#fff;color:#000;width:var(--w);height:var(--h);padding:3mm;display:flex;flex-direction:column;font-family:Arial,Helvetica,sans-serif;overflow:hidden;box-shadow:0 1px 6px rgba(0,0,0,.25);border-radius:2px;flex:none}
 .etq *{color:#000}
-.e-top{display:flex;justify-content:space-between;align-items:flex-start;gap:3mm;border-bottom:.6mm solid #000;padding-bottom:2mm}
-.e-logo{height:11mm;max-width:48mm;object-fit:contain}
-.e-logo.negro{filter:brightness(0)}
-.e-rem{font-size:2.6mm;line-height:1.25;text-align:right}
-.e-rem b{font-size:2.8mm}
-.e-lbl{font-size:2.4mm;font-weight:700;letter-spacing:.3mm;margin-top:2mm}
-.e-dest{flex:1;padding-top:1mm;min-height:0}
-.e-nom{font-size:5.4mm;font-weight:700;line-height:1.15}
-.e-at{font-size:3.4mm;margin-top:.5mm}
-.e-dir{font-size:4.2mm;line-height:1.25;margin-top:1mm;white-space:pre-line}
-.e-cp{font-size:6.5mm;font-weight:700;margin-top:1.5mm;line-height:1.1}
-.e-tel{font-size:3.6mm;margin-top:1mm}
-.e-avisos{display:flex;flex-wrap:wrap;gap:1.5mm;margin:1.5mm 0}
-.e-avisos span{border:.5mm solid #000;padding:.6mm 2mm;font-size:3.4mm;font-weight:700}
+.e-lbl{font-size:2.4mm;font-weight:700;letter-spacing:.3mm}
+.e-dest{flex:1;min-height:0;overflow:hidden;font-size:var(--f,5mm);line-height:1.2;padding-top:.3mm}
+.e-nom{font-size:1.15em;font-weight:700;line-height:1.1}
+.e-at{font-size:.7em;margin-top:.1em}
+.e-dir{font-size:.9em;margin-top:.15em;white-space:pre-line}
+.e-cp{font-size:1.3em;font-weight:700;margin-top:.12em;line-height:1.05}
+.e-tel{font-size:.75em;margin-top:.2em}
+.e-avisos{display:flex;flex-wrap:wrap;gap:1.5mm;margin:1mm 0}
+.e-avisos span{border:.5mm solid #000;padding:.5mm 2mm;font-size:3.4mm;font-weight:700}
 .e-avisos span.inv{background:#000;color:#fff}
-.e-obs{font-size:3.2mm;border-top:.3mm dashed #000;padding-top:1mm;white-space:pre-line}
-.e-pie{display:flex;border-top:.6mm solid #000;margin-top:1.5mm}
-.e-pie>div{flex:1;padding:1mm 1.5mm;border-right:.3mm solid #000}
-.e-pie>div:last-child{border-right:0}
-.e-pie small{display:block;font-size:2.3mm;font-weight:700}
-.e-pie strong{font-size:4.2mm;white-space:nowrap}
-.e-pie .e-alb strong{font-size:3.4mm}
-.e-bulto strong{font-size:6mm}
-.e-bc{text-align:center;padding-top:1.5mm}
-.e-bc svg{max-width:100%;height:13mm}
-.etq.compacta{padding:2.5mm}
-.etq.compacta .e-logo{height:8mm}
-.etq.compacta .e-nom{font-size:4.4mm}
-.etq.compacta .e-dir{font-size:3.4mm}
-.etq.compacta .e-cp{font-size:5mm}
-.etq.compacta .e-bc svg{height:9mm}
+.e-obs{font-size:3.2mm;border-top:.3mm dashed #000;padding-top:1mm;margin-bottom:1mm;white-space:pre-line}
+.e-pie{display:flex;align-items:center;border-top:.6mm solid #000;padding-top:1.5mm;gap:2.5mm}
+.e-emp{display:flex;align-items:center;gap:2.5mm;flex:1;min-width:0}
+.e-logo{height:9mm;max-width:36mm;object-fit:contain;flex:none}
+.e-logo.negro{filter:brightness(0)}
+.e-rem{font-size:2.4mm;line-height:1.3}
+.e-rem i{font-style:normal;font-size:2mm;font-weight:700;letter-spacing:.2mm}
+.e-dat{display:flex;border:.4mm solid #000;flex:none}
+.e-dat>div{padding:.8mm 2mm;border-right:.3mm solid #000;display:flex;flex-direction:column;justify-content:center}
+.e-dat>div:last-child{border-right:0}
+.e-dat small{font-size:2.2mm;font-weight:700}
+.e-dat strong{font-size:4mm;white-space:nowrap}
+.e-dat .e-bulto strong{font-size:5.5mm}
+.etq.estrecha .e-pie{flex-direction:column;align-items:stretch;gap:1.5mm}
+.etq.estrecha .e-dat>div{flex:1}
+.etq.baja{padding:2mm}
+.etq.baja .e-pie{padding-top:1mm}
+.etq.baja .e-logo{height:6.5mm;max-width:26mm}
+.etq.baja .e-rem{font-size:2mm}
+.etq.baja .e-dat strong{font-size:3.2mm}
+.etq.baja .e-dat .e-bulto strong{font-size:4mm}
+.etq.baja .e-avisos span{font-size:2.8mm;padding:.3mm 1.5mm}
 
 #zonaImpresion{display:none}
 @media print{
   body{background:#fff}
   header,main{display:none!important}
   #zonaImpresion{display:block}
-  .etq{box-shadow:none;border-radius:0;page-break-after:always;break-after:page}
-  .etq:last-child{page-break-after:auto;break-after:auto}
+  .hoja{width:var(--pw);height:var(--ph);position:relative;overflow:hidden;page-break-after:always;break-after:page}
+  .hoja:last-child{page-break-after:auto;break-after:auto}
+  .hoja .etq{position:absolute;top:0;left:0;box-shadow:none;border-radius:0}
+  .hoja.rot .etq{transform:translateX(var(--pw)) rotate(90deg);transform-origin:0 0}
 }
 </style>
 </head>
@@ -117,10 +120,8 @@ button.mini{padding:4px 9px;font-size:12px}
 
   <div class="card">
     <h2>Envío</h2>
-    <div class="fila">
-      <div><label for="s_alb">Nº albarán / pedido</label><input id="s_alb"></div>
-      <div><label for="s_fecha">Fecha</label><input id="s_fecha" type="date"></div>
-    </div>
+    <label for="s_fecha">Fecha</label>
+    <input id="s_fecha" type="date">
     <div class="fila3">
       <div><label for="s_bultos">Nº de bultos</label><input id="s_bultos" type="number" min="1" max="99" value="1"></div>
       <div><label for="s_peso">Peso total (kg)</label><input id="s_peso" inputmode="decimal"></div>
@@ -133,12 +134,12 @@ button.mini{padding:4px 9px;font-size:12px}
       <label><input type="checkbox" value="NO APILAR">No apilar</label>
       <label><input type="checkbox" value="ESTE LADO ARRIBA">Este lado arriba</label>
       <label><input type="checkbox" value="URGENTE" data-inv="1">Urgente</label>
-      <label><input type="checkbox" value="PORTES DEBIDOS" data-inv="1">Portes debidos</label>
+      <label><input type="checkbox" value="PORTES PAGADOS" data-inv="1" data-grupo="portes">Portes pagados</label>
+      <label><input type="checkbox" value="PORTES DEBIDOS" data-inv="1" data-grupo="portes">Portes debidos</label>
       <label><input type="checkbox" value="REEMBOLSO" data-inv="1">Reembolso</label>
     </div>
     <label for="s_obs">Observaciones</label>
     <textarea id="s_obs" rows="2"></textarea>
-    <label class="chk"><input type="checkbox" id="s_bc" checked>Código de barras del nº de albarán</label>
   </div>
 
   <div class="card">
@@ -160,7 +161,7 @@ button.mini{padding:4px 9px;font-size:12px}
     <h2>Impresora Honeywell PC42d</h2>
     <div class="fila">
       <div>
-        <label for="p_tam">Tamaño de etiqueta</label>
+        <label for="p_tam">Tamaño del rollo (ancho × largo)</label>
         <select id="p_tam">
           <option value="100x150">100 × 150 mm</option>
           <option value="100x100">100 × 100 mm</option>
@@ -174,6 +175,8 @@ button.mini{padding:4px 9px;font-size:12px}
         <div class="fila"><input id="p_w" type="number" min="20" max="104" value="100"><input id="p_h" type="number" min="20" max="300" value="150"></div>
       </div>
     </div>
+    <label for="p_or">Orientación</label>
+    <select id="p_or"><option value="h">Horizontal (se lee con la etiqueta tumbada)</option><option value="v">Vertical</option></select>
     <label class="chk"><input type="checkbox" id="p_negro" checked>Logo en negro (sale más nítido en térmica directa)</label>
   </div>
 
@@ -206,7 +209,7 @@ const lsSet=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
 
 const REM=['r_nom','r_dir','r_cp','r_tel','r_extra'];
 const DEST=['d_nom','d_at','d_dir','d_cp','d_pob','d_prov','d_tel'];
-const PREF=['p_tam','p_w','p_h','p_negro'];
+const PREF=['p_tam','p_w','p_h','p_or','p_negro'];
 
 function val(id){const e=$(id);return e.type==='checkbox'?e.checked:e.value.trim()}
 function setVal(id,v){const e=$(id);if(e.type==='checkbox')e.checked=!!v;else e.value=v??''}
@@ -237,27 +240,30 @@ function tam(){
   }
   return t.split('x').map(Number);
 }
+/* pw×ph = rollo (como sale de la impresora); dw×dh = etiqueta tal como se lee */
+function geo(){
+  const[w,h]=tam(),hz=val('p_or')!=='v';
+  const dw=hz?Math.max(w,h):Math.min(w,h),dh=hz?Math.min(w,h):Math.max(w,h);
+  return{pw:w,ph:h,dw,dh,rot:dw!==w};
+}
 
 /* ---- Construir etiqueta ---- */
 function fechaES(iso){if(!iso)return'';const[y,m,d]=iso.split('-');return `${d}/${m}/${y}`}
-function etiqueta(n,total){
-  const [w,h]=tam(), compacta=h<=100;
+function etiqueta(n,total,f){
+  const g=geo(),baja=g.dh<=60;
+  const cls=(g.dw<120?' estrecha':'')+(baja?' baja':'');
   const avisos=[...document.querySelectorAll('#avisos input:checked')]
     .map(c=>`<span class="${c.dataset.inv?'inv':''}">${esc(c.value)}</span>`).join('');
   const r={};REM.forEach(k=>r[k]=val(k));
   const d={};DEST.forEach(k=>d[k]=val(k));
   const cpLinea=[d.d_cp,d.d_pob].filter(Boolean).join(' ')+(d.d_prov?` (${d.d_prov})`:'');
-  const alb=val('s_alb'), peso=val('s_peso'), ag=val('s_agencia');
-  const conBC=val('s_bc')&&alb&&h>=75;
-  const remHtml=`<b>${esc(r.r_nom)}</b>`+[...r.r_dir.split('\n'),r.r_cp,r.r_tel?'Tel. '+r.r_tel:'',compacta?'':r.r_extra]
-    .filter(Boolean).map(x=>'<br>'+esc(x)).join('');
-  return `<div class="etq${compacta?' compacta':''}" style="--w:${w}mm;--h:${h}mm">
-    <div class="e-top">
-      <img class="e-logo${val('p_negro')?' negro':''}" src="${LOGO}" alt="Torneiro">
-      <div class="e-rem"><div style="font-size:2.2mm;font-weight:700">REMITENTE</div>${remHtml}</div>
-    </div>
+  const peso=val('s_peso'),ag=val('s_agencia'),obs=val('s_obs');
+  const l1=r.r_dir.split('\n').map(x=>x.trim()).filter(Boolean).join(' · ');
+  const l2=[r.r_cp,r.r_tel?'Tel. '+r.r_tel:''].filter(Boolean).join(' · ');
+  const remHtml=`<i>REMITENTE</i> <b>${esc(r.r_nom)}</b>`+[l1,l2,baja?'':r.r_extra].filter(Boolean).map(x=>'<br>'+esc(x)).join('');
+  return `<div class="etq${cls}" style="--w:${g.dw}mm;--h:${g.dh}mm${f?`;--f:${f}mm`:''}">
+    <div class="e-lbl">DESTINATARIO</div>
     <div class="e-dest">
-      <div class="e-lbl">DESTINATARIO</div>
       <div class="e-nom">${esc(d.d_nom)||'&nbsp;'}</div>
       ${d.d_at?`<div class="e-at">At.: ${esc(d.d_at)}</div>`:''}
       ${d.d_dir?`<div class="e-dir">${esc(d.d_dir)}</div>`:''}
@@ -265,51 +271,62 @@ function etiqueta(n,total){
       ${d.d_tel?`<div class="e-tel">Tel. ${esc(d.d_tel)}</div>`:''}
     </div>
     ${avisos?`<div class="e-avisos">${avisos}</div>`:''}
-    ${val('s_obs')&&!compacta?`<div class="e-obs">${esc(val('s_obs'))}</div>`:''}
+    ${obs&&!baja?`<div class="e-obs">${esc(obs)}</div>`:''}
     <div class="e-pie">
-      <div class="e-bulto"><small>BULTO</small><strong>${n} / ${total}</strong></div>
-      ${peso?`<div><small>PESO</small><strong>${esc(peso)} kg</strong></div>`:''}
-      ${alb?`<div class="e-alb"><small>ALBARÁN</small><strong>${esc(alb)}</strong></div>`:''}
-      <div><small>${ag?esc(ag.toUpperCase()):'FECHA'}</small><strong>${ag?`<span style="font-size:3.2mm">${fechaES(val('s_fecha'))}</span>`:fechaES(val('s_fecha'))}</strong></div>
+      <div class="e-emp"><img class="e-logo${val('p_negro')?' negro':''}" src="${LOGO}" alt="Torneiro"><div class="e-rem">${remHtml}</div></div>
+      <div class="e-dat">
+        <div class="e-bulto"><small>BULTO</small><strong>${n}/${total}</strong></div>
+        ${peso?`<div><small>PESO</small><strong>${esc(peso)} kg</strong></div>`:''}
+        <div><small>${ag?esc(ag.toUpperCase()):'FECHA'}</small><strong>${fechaES(val('s_fecha'))}</strong></div>
+      </div>
     </div>
-    ${conBC?`<div class="e-bc"><svg class="bc" data-v="${esc(alb)}"></svg></div>`:''}
   </div>`;
 }
-function dibujarBarras(cont){
-  if(!window.JsBarcode)return;
-  cont.querySelectorAll('svg.bc').forEach(s=>{
-    try{JsBarcode(s,s.dataset.v,{format:'CODE128',displayValue:false,margin:0,height:60,width:2})}catch(e){s.remove()}
-  });
+/* Agranda la letra del destinatario hasta llenar el hueco libre */
+function ajustar(el){
+  const d=el.querySelector('.e-dest');
+  const cabe=()=>d.scrollHeight<=d.clientHeight+1&&d.scrollWidth<=d.clientWidth+1;
+  let lo=2.5,hi=11;
+  for(let i=0;i<14;i++){const m=(lo+hi)/2;d.style.setProperty('--f',m+'mm');if(cabe())lo=m;else hi=m}
+  const f=Math.floor(lo*10)/10;d.style.setProperty('--f',f+'mm');return f;
 }
-function pageCSS(){const[w,h]=tam();$('pageStyle').textContent=`@page{size:${w}mm ${h}mm;margin:0}@media print{html,body{width:${w}mm;margin:0;padding:0}}`}
+let fitF=5;
+function pageCSS(){const g=geo();$('pageStyle').textContent=`@page{size:${g.pw}mm ${g.ph}mm;margin:0}@media print{html,body{width:${g.pw}mm;margin:0;padding:0}}`}
 function bultos(){return Math.min(99,Math.max(1,parseInt(val('s_bultos'))||1))}
 
 function render(){
-  const total=bultos();
+  const total=bultos(),g=geo();
   $('preview').innerHTML=etiqueta(1,total);
-  dibujarBarras($('preview'));
-  const[w,h]=tam();
-  $('prevInfo').textContent=`· ${w}×${h} mm · ${total} etiqueta${total>1?'s':''}`;
+  fitF=ajustar($('preview').querySelector('.etq'));
+  const pe=$('preview').querySelector('.etq'),sc=Math.min(1,($('preview').clientWidth-40)/pe.offsetWidth);pe.style.zoom=sc>0?sc:1;
+  $('prevInfo').textContent=`· ${g.dw}×${g.dh} mm · ${total} etiqueta${total>1?'s':''}${g.rot?` · se imprime girada en el rollo de ${g.pw}×${g.ph}`:''}`;
   $('customBox').hidden=val('p_tam')!=='custom';
   pageCSS();
   const r={};REM.forEach(k=>r[k]=val(k));lsSet('etq_rem',r);
   const p={};PREF.forEach(k=>p[k]=val(k));lsSet('etq_pref',p);
 }
 
+document.getElementById('avisos').addEventListener('change',e=>{
+  const c=e.target;if(c.checked&&c.dataset.grupo)
+    document.querySelectorAll(`#avisos input[data-grupo="${c.dataset.grupo}"]`).forEach(o=>{if(o!==c)o.checked=false});
+},true);
 document.addEventListener('input',render);
 document.addEventListener('change',render);
 
 $('btnImprimir').onclick=()=>{
-  const total=bultos(),z=$('zonaImpresion');
-  let html='';for(let i=1;i<=total;i++)html+=etiqueta(i,total);
-  z.innerHTML=html;dibujarBarras(z);pageCSS();
+  render();
+  const total=bultos(),g=geo(),z=$('zonaImpresion');
+  let html='';
+  for(let i=1;i<=total;i++)html+=`<div class="hoja${g.rot?' rot':''}" style="--pw:${g.pw}mm;--ph:${g.ph}mm">${etiqueta(i,total,fitF)}</div>`;
+  z.innerHTML=html;pageCSS();
   const imgs=[...z.querySelectorAll('img')];
   Promise.all(imgs.map(i=>i.complete?1:new Promise(r=>{i.onload=i.onerror=r}))).then(()=>window.print());
 };
+window.addEventListener('resize',render);
 window.addEventListener('afterprint',()=>{$('zonaImpresion').innerHTML=''});
 
 $('btnLimpiar').onclick=()=>{
-  DEST.forEach(k=>setVal(k,''));['s_alb','s_peso','s_obs'].forEach(k=>setVal(k,''));
+  DEST.forEach(k=>setVal(k,''));['s_peso','s_obs'].forEach(k=>setVal(k,''));
   $('s_bultos').value=1;$('agenda').value='';
   document.querySelectorAll('#avisos input').forEach(c=>c.checked=false);
   $('s_fecha').value=new Date().toISOString().slice(0,10);
